@@ -14,6 +14,15 @@ app.use(express.json());
 
 app.use('/api/v1/tasks', tasks);
 
+// Not Found Middleware
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    error: 'Route not found',
+    message: 'The requested endpoint does not exist',
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
