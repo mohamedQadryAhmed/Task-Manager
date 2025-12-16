@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const tasks = require('./src/routes/tasks.js');
 const connectDB = require('./src/config/db.js');
+const errorHandler = require('./src/middleware/errorHandler.js');
 
 dotenv.config();
 const app = express();
@@ -22,6 +23,9 @@ app.use((req, res) => {
     message: 'The requested endpoint does not exist',
   });
 });
+
+// Error Handling Middleware
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
