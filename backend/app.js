@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const tasks = require('./src/routes/tasks.js');
 const connectDB = require('./src/config/db.js');
 const errorHandler = require('./src/middleware/errorHandler.js');
@@ -11,6 +12,7 @@ const port = process.env.PORT || 3000;
 
 connectDB();
 
+app.use(cors('localhost:5173', { credentials: true }));
 app.use(express.json());
 
 app.use('/api/v1/tasks', tasks);
